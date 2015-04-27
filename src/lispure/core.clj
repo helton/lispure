@@ -82,10 +82,13 @@
           (lispure-evaluate consequence environment)
           (lispure-evaluate alternative environment))))  
     
-    ;(defn evaluate-lambda [expression]
-    ;  (let [args (first  (get-arg-list expression))
-    ;        body (second (get-arg-list expression))]
-    ;    (fn [args])))
+    (defn evaluate-lambda [expression]
+      (let [params (first  (get-arg-list expression))
+            body   (second (get-arg-list expression))]
+        (fn [& args]
+          (let [lambda-environment
+                (merge environment (zipmap params (apply list args)))]
+            (lispure-evaluate body lambda-environment)))))
    
     (cond
       (lispure-number?  expression) (evaluate-number  expression)
@@ -97,5 +100,7 @@
       ;(lispure-lambda?  expression) (evaluate-lambda  expression)
       :else 
         (let [function ((get-operator expression) environment)
-              arg-list (get-arg-list expression)]
+              arg-list (map 
+                         (fn [arg] (lispure-evaluate arg environment))
+                         (get-arg-list expression))]
           (apply function arg-list)))))

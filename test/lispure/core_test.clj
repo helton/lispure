@@ -14,7 +14,7 @@
 
 (deftest test-evaluate-function-calls
   (testing "Should function calls on standard environment [+]"
-    (is (= 4 (lispure-evaluate '(+ 1 3)))))
+    (is (= 13 (lispure-evaluate '(+ 1 3 (+ 4 5))))))
   (testing "Should function calls on standard environment [-]"
     (is (= -2 (lispure-evaluate '(- 1 3)))))
   (testing "Should function calls on standard environment [*]"
@@ -42,11 +42,18 @@
 
 (deftest test-evaluate-define
   (testing "Should evaluate define"
-    (let [environment      standard-environment
-          define-execution (lispure-evaluate '(define x 123) environment)
-          result           (lispure-evaluate 'x environment)]
-    	(is (= nil define-execution))
+    (let [environment    standard-environment
+          define-result (lispure-evaluate '(define x 123) environment)
+          result        (lispure-evaluate 'x environment)]
+    	(is (= nil define-result))
         (is (= 123 result)))))
+
+;(deftest test-evaluate-lambda
+;  (testing "Should evaluate lambda"
+;    (let [environment   standard-environment
+;          define-result (lispure-evaluate '(define my-sqr (lambda (x) (* x x)) 10) environment)
+;          result        (lispure-evaluate '(my-sqr 11) environment)]
+;        (is (= 121 result)))))
 
 (deftest test-evaluate-if
   (testing "Should evaluate if consequence (true condition)"

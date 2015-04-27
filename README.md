@@ -1,4 +1,4 @@
-# LISPure
+# Lispure
 
 A pure LISP interpreter in Clojure.
 
