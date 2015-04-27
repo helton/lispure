@@ -6,20 +6,21 @@
 ; Environment
 ; ----------------------------------------------
 
-(def standard-environment {
-  '+ +
-  '- -
-  '* *
-  '/ /
-  '= =
-  '> >
-  '< <
-  '>= >=
-  '<= <=
-  'not not
-  'car first ;test it!
-  'cdr rest  ;test it!
-  })
+(def standard-environment 
+  (transient {
+    '+ +
+    '- -
+    '* *
+    '/ /
+    '= =
+    '> >
+    '< <
+    '>= >=
+    '<= <=
+    'not not
+    'car first ;test it!
+    'cdr rest  ;test it!
+  }))
 
 (defn lispure-evaluate 
   ([expression]

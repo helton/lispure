@@ -40,24 +40,16 @@
   (testing "Should evaluate quote"
     (is (= '123 (lispure-evaluate '(quote 123))))))
 
-;(deftest test-evaluate-define
-;  (testing "Should evaluate define"
-;    (let [environment      standard-environment
-;          define-execution (lispure-evaluate '(define x 123) environment)
-;          result           (lispure-evaluate 'x environment)]
-;    	(is (= nil define-execution))
-;        (is (= 123 result)))))
+(deftest test-evaluate-define
+  (testing "Should evaluate define"
+    (let [environment      standard-environment
+          define-execution (lispure-evaluate '(define x 123) environment)
+          result           (lispure-evaluate 'x environment)]
+    	(is (= nil define-execution))
+        (is (= 123 result)))))
 
 (deftest test-evaluate-if
   (testing "Should evaluate if consequence (true condition)"
     (is (= 'ok (lispure-evaluate '(if (< 1 2) (quote ok) (quote nok))))))
   (testing "Should evaluate if alternative (false condition)"
     (is (= 'nok (lispure-evaluate '(if (> 1 2) (quote ok) (quote nok)))))))
-
-; Examples
-(comment
-	(is (= 4 (+ 2 2)))
-	(is (instance? Integer 256))
-	(is (.startsWith "abcde" "ab"))
-	(is (thrown? ArithmeticException (/ 1 0))) 
-)
