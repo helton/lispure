@@ -42,8 +42,8 @@
 
 (deftest test-evaluate-define
   (testing "Should evaluate define"
-    (let [environment    standard-environment
-          define-result (lispure-evaluate '(define x 123) environment)
+    (let [environment   standard-environment
+          define-result (lispure-evaluate '(define x (+ 2 (* 11 11))) environment)
           result        (lispure-evaluate 'x environment)]
     	(is (= nil define-result))
         (is (= 123 result)))))

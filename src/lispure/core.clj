@@ -39,7 +39,7 @@
     (defn get-arg-list [expression]
       (:arg-list (read-form expression)))
    
-      (def lispure-number? number?)
+    (def lispure-number? number?)
 
     (defn lispure-boolean? [expression]
       (in? expression ['true 'false]))
@@ -71,7 +71,7 @@
     (defn evaluate-define [expression]
       (let [key   (first  (get-arg-list expression))
             value (second (get-arg-list expression))]
-        (assoc! environment key value) ; Really? What's the FP? Come on, dude :D
+        (assoc! environment key (lispure-evaluate value environment)) ; Really? What's the FP? Come on, dude :D
         nil))
    
     (defn evaluate-if [expression]
